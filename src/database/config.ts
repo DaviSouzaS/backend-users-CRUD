@@ -9,4 +9,4 @@ const client: Client = new Client({
     port: parseInt(process.env.DB_PORT!)
 })
 
-export default client
+export { client } 
