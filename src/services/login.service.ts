@@ -46,7 +46,7 @@ const createLogin = async (loginData: iLoginRequest): Promise<iToken> => {
 
     const token: string = sign(
         {email: checkIfUserExist.email},
-        String(process.env.SECRET_KEY),
+        "SECRET_KEY",
         {expiresIn: '24h', subject: String(checkIfUserExist.id)}
     )
 
