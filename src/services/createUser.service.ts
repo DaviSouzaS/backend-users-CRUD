@@ -1,11 +1,13 @@
 import {iUserRequest, UserResult, iUserWithoutPassword} from "../interfaces/user.interface";
 import { client } from "../database/config";
-import { createUserSchema } from "../schemas/user.schemas"
+import { hash } from "bcryptjs"
 import format from "pg-format";
 
 const createUserService = async (userData: iUserRequest): Promise<iUserWithoutPassword> => {
 
-  const validateUserData = createUserSchema.parse(userData)
+  const encryptedKey = await hash(userData.password, 10)
+
+  userData.password = encryptedKey
 
   const queryString: string = format(
     `
@@ -14,8 +16,8 @@ const createUserService = async (userData: iUserRequest): Promise<iUserWithoutPa
     VALUES(%L)
       RETURNING id, name, email, admin, active
     `,
-    Object.keys(validateUserData),
-    Object.values(validateUserData)
+    Object.keys(userData),
+    Object.values(userData)
   )
 
   const queryResult: UserResult = await client.query(queryString)

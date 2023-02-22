@@ -1,4 +1,5 @@
 import { Response, Request, NextFunction } from "express"
+import { ZodTypeAny } from "zod";
 import { client } from "../database/config"
 import { AppError } from "../error";
 
@@ -11,7 +12,7 @@ const checkIfEmailIsUnique = async (request: Request, response: Response, next: 
     SELECT 
         *
     FROM
-        users
+        users;
     `
 
     const queryResult = await client.query(queryString)
@@ -29,6 +30,16 @@ const checkIfEmailIsUnique = async (request: Request, response: Response, next: 
     return next()
 }
 
+const validateData = (schema: ZodTypeAny) => (request: Request, response: Response, next: NextFunction) => {
+    
+    const validate = schema.parse(request.body)
+
+    request.body = validate
+
+    return next()
+}
+
 export {
-    checkIfEmailIsUnique
+    checkIfEmailIsUnique,
+    validateData
 }

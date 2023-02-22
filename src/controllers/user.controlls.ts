@@ -11,5 +11,5 @@ const createUserController = async (request: Request, response: Response): Promi
 };
 
 export { 
-    createUserController
+  createUserController
 }
