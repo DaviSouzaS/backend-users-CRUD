@@ -1,5 +1,3 @@
-import { QueryResult } from "pg"
-
 interface iLoginRequest {
     email: string,
     password: string
