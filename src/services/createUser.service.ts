@@ -9,6 +9,13 @@ const createUserService = async (userData: iUserRequest): Promise<iUserWithoutPa
 
   userData.password = encryptedKey
 
+  const userDataValid = {
+    name: userData.name,
+	  email: userData.email ,
+	  password: userData.password,
+	  admin: userData.admin
+  }
+
   const queryString: string = format(
     `
     INSERT INTO
@@ -16,8 +23,8 @@ const createUserService = async (userData: iUserRequest): Promise<iUserWithoutPa
     VALUES(%L)
       RETURNING id, name, email, admin, active
     `,
-    Object.keys(userData),
-    Object.values(userData)
+    Object.keys(userDataValid),
+    Object.values(userDataValid)
   )
 
   const queryResult: UserResult = await client.query(queryString)
