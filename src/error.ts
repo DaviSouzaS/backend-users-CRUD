@@ -12,7 +12,7 @@ class AppError extends Error {
     }
 }
 
-const errorHandler = (error: Error, request: Request, response: Response, next: NextFunction) => {
+const handleErrors = (error: Error, request: Request, response: Response, next: NextFunction) => {
 
     if (error instanceof AppError) {
         return response.status(error.statusCode).json({
@@ -34,5 +34,5 @@ const errorHandler = (error: Error, request: Request, response: Response, next: 
 
 export {
     AppError,
-    errorHandler
+    handleErrors
 }
