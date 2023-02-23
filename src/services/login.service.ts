@@ -5,12 +5,13 @@ import { QueryConfig } from "pg"
 import { compare } from "bcryptjs"
 import { sign } from "jsonwebtoken";
 import { AppError } from "../error"
+import "dotenv/config"
 
-const createLogin = async (loginData: iLoginRequest): Promise<iToken> => {
+const createLoginService = async (loginData: iLoginRequest): Promise<iToken> => {
 
     const email = loginData.email
 
-    const queryString = `
+    const queryString: string = `
     SELECT 
         *
     FROM
@@ -29,24 +30,23 @@ const createLogin = async (loginData: iLoginRequest): Promise<iToken> => {
         return item.email === email
     })
 
-    console.log(checkIfUserExist)
     if (checkIfUserExist === undefined) {
-        throw new AppError('Invalid email or password!1', 401);
+        throw new AppError('Invalid email or password!', 401);
     }
 
     if (!checkIfUserExist.active) {
-        throw new AppError('Invalid email or password!2', 401);
+        throw new AppError('Invalid email or password!', 401);
     }
 
     const checkIfPasswordIsCorrect: boolean = await compare(loginData.password, checkIfUserExist.password)
 
     if (!checkIfPasswordIsCorrect) {
-        throw new AppError('Invalid email or password!3', 401);
+        throw new AppError('Invalid email or password!', 401);
     }
 
     const token: string = sign(
         {email: checkIfUserExist.email},
-        "SECRET_KEY",
+        process.env.SECRET_KEY!,
         {expiresIn: '24h', subject: String(checkIfUserExist.id)}
     )
 
@@ -54,5 +54,5 @@ const createLogin = async (loginData: iLoginRequest): Promise<iToken> => {
 }
 
 export {
-    createLogin
+    createLoginService
 }

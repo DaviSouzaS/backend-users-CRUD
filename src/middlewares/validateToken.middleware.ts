@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "../error";
 import jwt from "jsonwebtoken";
+import "dotenv/config"
 
-const validateToken = async (request: Request, response: Response, next: NextFunction) => {
+const validateToken = async (request: Request, response: Response, next: NextFunction): Promise<void> => {
     
     const authToken = request.headers.authorization
 
@@ -14,13 +15,16 @@ const validateToken = async (request: Request, response: Response, next: NextFun
 
     jwt.verify(
         token,
-        "SECRET_KEY",
-        (error: any, decoded: any) => {
+        process.env.SECRET_KEY!,
+        (error, decoded: any) => {
             if (error) {
                 throw new AppError(error.message, 401)
             }
 
-            console.log(decoded)
+            request.user = {
+                id: decoded.sub
+            }
+            
             return next()
         }
     )
