@@ -1,6 +1,6 @@
-import { Request, Response } from "express"
-import { updateUserService } from "../services/updateUser.service"
 import { iUserUpdateRequest } from "../interfaces/updateUser.interface"
+import { updateUserService } from "../services/updateUser.service"
+import { Request, Response } from "express"
 
 const updateUserController = async (request: Request, response: Response): Promise<Response> => {
     

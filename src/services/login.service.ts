@@ -1,10 +1,10 @@
-import { UserWithPassword } from "../interfaces/user.interface"
 import { iLoginRequest, iToken } from "../interfaces/login.interface"
+import { UserWithPassword } from "../interfaces/user.interface"
 import { client } from "../database/config"
-import { QueryConfig } from "pg"
-import { compare } from "bcryptjs"
-import { sign } from "jsonwebtoken";
 import { AppError } from "../error"
+import { sign } from "jsonwebtoken"
+import { compare } from "bcryptjs"
+import { QueryConfig } from "pg"
 import "dotenv/config"
 
 const createLoginService = async (loginData: iLoginRequest): Promise<iToken> => {

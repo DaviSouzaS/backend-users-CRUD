@@ -1,7 +1,7 @@
 import { iUserUpdateRequest, UserUpdateResult } from "../interfaces/updateUser.interface"
-import format from "pg-format"
-import { QueryConfig } from "pg"
 import { client } from "../database"
+import { QueryConfig } from "pg"
+import format from "pg-format"
 
 const updateUserService = async (updateUserData: iUserUpdateRequest, userID: string): Promise<iUserUpdateRequest> => {
 
