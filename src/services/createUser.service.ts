@@ -1,7 +1,7 @@
-import {iUserRequest, UserResult, iUserWithoutPassword} from "../interfaces/user.interface";
-import { client } from "../database/config";
+import { iUserRequest, UserResult, iUserWithoutPassword } from "../interfaces/user.interface"
+import { client } from "../database/config"
 import { hash } from "bcryptjs"
-import format from "pg-format";
+import format from "pg-format"
 
 const createUserService = async (userData: iUserRequest): Promise<iUserWithoutPassword> => {
 

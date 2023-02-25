@@ -1,5 +1,5 @@
-import { Request, Response } from "express"
 import { readUserService } from "../services/readUser.service"
+import { Request, Response } from "express"
 
 const readUserController = async (request: Request, response: Response): Promise<Response> => {
 
