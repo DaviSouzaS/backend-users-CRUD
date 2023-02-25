@@ -1,6 +1,6 @@
+import { UserResult, iUserWithoutPassword } from "../interfaces/user.interface"
 import { client } from "../database/config"
 import { QueryConfig } from "pg"
-import { UserResult, iUserWithoutPassword } from "../interfaces/user.interface"
 
 const readUsersService = async (): Promise<iUserWithoutPassword[]> => {
 

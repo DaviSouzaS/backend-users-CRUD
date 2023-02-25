@@ -1,8 +1,8 @@
 import { Response, Request, NextFunction } from "express"
-import { QueryResult } from "pg";
-import { ZodTypeAny } from "zod";
 import { client } from "../database/config"
-import { AppError } from "../error";
+import { AppError } from "../error"
+import { QueryResult } from "pg"
+import { ZodTypeAny } from "zod"
 
 const checkIfEmailIsUnique = async (request: Request, response: Response, next: NextFunction): Promise <Response | void> => {
 

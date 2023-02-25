@@ -1,6 +1,6 @@
-import { client } from "../database/config"
-import { QueryConfig, QueryResult } from "pg"
 import { iUserWithoutPassword } from "../interfaces/user.interface"
+import { QueryConfig, QueryResult } from "pg"
+import { client } from "../database/config"
 
 const activeUserService = async (UserID:string): Promise<iUserWithoutPassword> => {
 

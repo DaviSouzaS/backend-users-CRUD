@@ -1,5 +1,5 @@
-import { Request, Response } from "express"
 import { activeUserService } from "../services/activeUser.service"
+import { Request, Response } from "express"
 
 const activeUserController = async (request: Request, response: Response): Promise<Response> => {
 

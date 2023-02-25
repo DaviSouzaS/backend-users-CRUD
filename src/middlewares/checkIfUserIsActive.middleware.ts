@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express"
+import { QueryConfig, QueryResult } from "pg"
 import { client } from "../database/config"
 import { AppError } from "../error"
-import { QueryConfig, QueryResult } from "pg"
 
 const checkIfUserIsActive = async (request: Request, response: Response, next: NextFunction) => {
 
